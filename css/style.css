@@ -428,7 +428,7 @@ footer.tiny {
   color: var(--gold-2);
   border-bottom: 1px dashed var(--gold);
   font-weight: 600;
-  cursor: help;
+  /* cursor: help; */
   display: inline-block;
 }
 .hover-pop {
@@ -453,7 +453,7 @@ footer.tiny {
 }
 .hover-pop b { display: block; color: var(--gold-2); margin-bottom: 6px; }
 .hover-pop a { color: var(--gold-2); }
-.hover-term:hover .hover-pop,
+/* .hover-term:hover .hover-pop, */
 .hover-term:focus-within .hover-pop {
   opacity: 1;
   pointer-events: auto;
