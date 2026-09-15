@@ -1,4 +1,4 @@
-const views = ["cover", "problem", "others", "method", "items", "factors", "story", "picture"];
+const views = ["cover", "contents", "problem", "others", "method", "items", "factors", "story", "picture"];
 const navMap = { problem: 0, others: 1, method: 2, items: 2, factors: 2, story: 3, picture: 4 };
 
 const REG = {
@@ -59,22 +59,63 @@ const MODALS = {
   era3: ["پاسخ و جریان ثروت", "<p>دیویس ۱۹۶۳ افت باروری را پاسخ به فشار جمعیتی پس از کاهش مرگ‌ومیر دانست. ایسترلین ۱۹۷۵ بر ادراک نسلی از رفاه انگشت گذاشت. کالدول ۱۹۷۶/۸۲ گفت با معکوس شدن جریان ثروت، فرزند از منبع اقتصادی به هزینه بدل می‌شود.</p>"],
   era4: ["گذار جمعیتی دوم", "<p>ون‌دکا ۱۹۸۷ نشان داد افت باروری جنوب اروپا را نمی‌توان فقط با اقتصاد توضیح داد. ارزش‌های فردگرایانه، هم‌باشی و انتخاب آگاهانه فرزند، مسیر تازه‌ای باز کرد. اینجا رفتار به کنش نزدیک می‌شود.</p>"],
   era5: ["VOC هافمن و هافمن", "<p>۱۹۷۳. افراد به‌خاطر ارزش‌هایی که به فرزند می‌دهند فرزند می‌آورند؛ نه فقط به‌خاطر هزینه. نه طبقه: پایگاه، جاودانگی، اخلاق و دین، عاطفه، تازگی، دستاورد، قدرت، مقایسه اجتماعی، سود اقتصادی. کائیتچی‌باشی بعداً گفت ارزش اقتصادی کم می‌شود اما ارزش عاطفی می‌ماند.</p>"],
-  era6: ["VOC ناوک", "<p>ناوک ۲۰۰۵ و ۲۰۱۴ ارزش‌های فرزند را به دو هدف غایی وصل کرد: اعتبار اجتماعی و رفاه فیزیکی. فرزند کالای واسط است. ساختار فرصت تعیین می‌کند کدام واسط در دسترس است. پژوهش حاضر از همین حلقه شروع می‌کند و محتوای دوگانه را با وبر چهارتایی می‌کند.</p>"]
+  era6: ["VOC ناوک", "<p>ناوک ۲۰۰۵ و ۲۰۱۴ ارزش‌های فرزند را به دو هدف غایی وصل کرد: اعتبار اجتماعی و رفاه فیزیکی. فرزند کالای واسط است. ساختار فرصت تعیین می‌کند کدام واسط در دسترس است.</p>"]
 };
 
 const COLORS = ["#c9a36a", "#7d9a7a", "#c07058", "#8aa0b4"];
 
-function go(id) {
-  document.querySelectorAll(".view").forEach((v) => v.classList.remove("on"));
+let currentView = document.querySelector(".view.on")?.id || "cover";
+let returnAnchor = null;
+
+function originSection(el) {
+  return el?.closest?.(".block[id]")?.id || null;
+}
+
+function jumpScroll(top) {
+  const html = document.documentElement;
+  const prev = html.style.scrollBehavior;
+  html.style.scrollBehavior = "auto";
+  window.scrollTo(0, Math.max(0, top));
+  html.style.scrollBehavior = prev;
+}
+
+function scrollToSection(sectionId) {
+  const target = sectionId && document.getElementById(sectionId);
+  if (!target) {
+    jumpScroll(0);
+    return;
+  }
+  const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 64;
+  const y = target.getBoundingClientRect().top + window.scrollY - navH - 18;
+  jumpScroll(y);
+}
+
+function go(id, opts = {}) {
+  const fromView = currentView;
   const el = document.getElementById(id) || document.getElementById("cover");
+
+  if ((id === "items" || id === "factors") && fromView === "method") {
+    returnAnchor = { view: "method", section: opts.fromSection || null };
+  }
+
+  document.querySelectorAll(".view").forEach((v) => v.classList.remove("on"));
   el.classList.add("on");
   document.body.classList.toggle("on-cover", el.id === "cover");
-  window.scrollTo({ top: 0, behavior: "instant" });
+  document.body.classList.toggle("on-contents", el.id === "contents");
+  currentView = el.id;
+
+  const restore = opts.section && el.contains(document.getElementById(opts.section));
+  if (restore) requestAnimationFrame(() => scrollToSection(opts.section));
+  else jumpScroll(0);
+
   const idx = navMap[id];
   document.querySelectorAll(".spotlight-nav a").forEach((a) => {
     a.classList.toggle("active", Number(a.dataset.index) === idx);
   });
-  if (idx !== undefined) setAmbience(idx);
+  if (idx !== undefined) {
+    if (fromView === "cover" || fromView === "contents") requestAnimationFrame(() => setAmbience(idx));
+    else setAmbience(idx);
+  }
   if (id === "story") requestAnimationFrame(drawCharts);
   if (id === "factors") requestAnimationFrame(drawParallel);
   if (id === "problem") requestAnimationFrame(drawTfr);
@@ -107,11 +148,41 @@ nav.querySelectorAll("a").forEach((a) => {
     go(a.getAttribute("href").slice(1));
   });
 });
-document.querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", () => go(b.dataset.go)));
+document.querySelectorAll("[data-go]").forEach((b) => b.addEventListener("click", (e) => {
+  if (b.tagName === "A") e.preventDefault();
+  const dest = b.dataset.go;
+  if (dest === "method" && (currentView === "items" || currentView === "factors")) {
+    go("method", { section: returnAnchor?.section });
+    return;
+  }
+  go(dest, { fromSection: originSection(b) });
+}));
+
+const homeMenu = document.querySelector(".home-menu");
+const homeBtn = homeMenu.querySelector(".home-btn");
+function setHomeOpen(open) {
+  homeMenu.classList.toggle("open", open);
+  homeBtn.setAttribute("aria-expanded", open ? "true" : "false");
+}
+homeBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  setHomeOpen(!homeMenu.classList.contains("open"));
+});
+homeMenu.addEventListener("mouseleave", () => setHomeOpen(false));
+homeMenu.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    setHomeOpen(false);
+    homeBtn.focus();
+  }
+});
+document.addEventListener("click", () => setHomeOpen(false));
+homeMenu.querySelectorAll("[data-go]").forEach((b) => {
+  b.addEventListener("click", () => setHomeOpen(false));
+});
 document.querySelectorAll("a.step").forEach((a) => {
   a.addEventListener("click", (e) => {
     e.preventDefault();
-    go(a.getAttribute("href").slice(1));
+    go(a.getAttribute("href").slice(1), { fromSection: originSection(a) });
   });
 });
 
@@ -286,7 +357,7 @@ function drawParallel() {
       labels: Array.from({ length: 27 }, (_, i) => i + 1),
       datasets: [
         {
-          label: "مقادیر ویژه واقعی",
+          label: "مقادیر ویژه",
           data: EIGENVALUES,
           borderColor: "#1c1915",
           backgroundColor: "transparent",
@@ -295,7 +366,7 @@ function drawParallel() {
           pointBackgroundColor: "#1c1915"
         },
         {
-          label: "مرجع موازی",
+          label: "تحلیل موازی",
           data: PARALLEL_REF,
           borderColor: "#8a6230",
           borderDash: [5, 4],

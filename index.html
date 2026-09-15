@@ -11,9 +11,15 @@
 <body class="on-cover">
   <div class="app">
     <div class="nav-wrap">
-      <button class="home-btn" data-go="cover" title="بازگشت به صفحه آغاز" aria-label="خانه">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/></svg>
-      </button>
+      <div class="home-menu">
+        <button class="home-btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="home-pop" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 11.5L12 4l8 7.5"/><path d="M7 10.5V20h10v-9.5"/></svg>
+        </button>
+        <div class="home-pop" id="home-pop" role="menu">
+          <button type="button" role="menuitem" data-go="cover">صفحه آغاز</button>
+          <button type="button" role="menuitem" data-go="contents">مسیر ارائه</button>
+        </div>
+      </div>
       <nav class="spotlight-nav" id="nav">
         <div class="spot"></div>
         <div class="ambi"></div>
@@ -36,6 +42,7 @@
         </ul>
       </nav>
     </div>
+    <button class="enter back-float" data-go="method" type="button">بازگشت به روش</button>
 
     <section class="view on" id="cover">
       <div class="cover">
@@ -48,7 +55,68 @@
         <p class="meta">استاد راهنما: <b>دکتر فاطمه ترابی</b></p>
         <p class="meta">استاد مشاور: <b>دکتر رسول صادقی</b></p>
         <p class="meta">شهریور ۱۴۰۵</p>
-        <button class="enter" data-go="problem">شروع ارائه</button>
+        <button class="enter" data-go="contents">شروع ارائه</button>
+      </div>
+    </section>
+
+    <section class="view" id="contents">
+      <div class="contents-slide">
+        <p class="kicker">مسیر ارائه</p>
+        <h2 class="display">پنج پرسش</h2>
+        <nav class="toc" aria-label="فهرست ارائه">
+          <ol>
+            <li>
+              <a href="#problem" data-go="problem">
+                <span class="toc-num">۱</span>
+                <svg class="toc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+                <span class="toc-copy">
+                  <b>مسئله چیست</b>
+                  <span>باروری، پرسش وارونه، مبنای ارزش فرزند</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#others" data-go="others">
+                <span class="toc-num">۲</span>
+                <svg class="toc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19a2 2 0 0 1 2-2h12M6 17V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12"/></svg>
+                <span class="toc-copy">
+                  <b>دیگران چه کار کرده‌اند؟</b>
+                  <span>سنت پژوهشی، ناوک و وبر</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#method" data-go="method">
+                <span class="toc-num">۳</span>
+                <svg class="toc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20h16M7 16l3-8 3 5 2-3 4 6"/></svg>
+                <span class="toc-copy">
+                  <b>چگونه سنجیدیم؟</b>
+                  <span>وزن، نشانگر، عامل، رگرسیون</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#story" data-go="story">
+                <span class="toc-num">۴</span>
+                <svg class="toc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 14l3-3 2 2 4-5"/></svg>
+                <span class="toc-copy">
+                  <b>روایت داده‌ها چه بود؟</b>
+                  <span>خوشه، زمان‌بندی و اثر ابعاد</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="#picture" data-go="picture">
+                <span class="toc-num">۵</span>
+                <svg class="toc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+                <span class="toc-copy">
+                  <b>چه تصویری به دست آمد؟</b>
+                  <span>رابطه برقرار است؛ یکدست نیست</span>
+                </span>
+              </a>
+            </li>
+          </ol>
+        </nav>
       </div>
     </section>
 
@@ -77,7 +145,7 @@
           </div>
           <article class="card">
             <h3>روند میزان باروری کل ایران</h3>
-            <p class="note">محور افقی سال شمسی است و فاصله‌ها متناسب با تقویم‌اند. خط‌چین سطح تقریبی جانشینی ۲٫۱ را نشان می‌دهد.</p>
+            <p class="note">خط‌چین سطح تقریبی جانشینی ۲٫۱ را نشان می‌دهد.</p>
             <div class="chart-box"><canvas id="tfr"></canvas></div>
           </article>
         </article>
@@ -146,7 +214,6 @@
         <article class="block" id="theory-line">
           <p class="kicker">نسبت با سنت پژوهشی</p>
           <h2>مبانی نظری از کجا آمده‌اند؟</h2>
-          <p class="lead">سنت جمعیت و اقتصاد در پایین است؛ سنت ارزش فرزند موازی در بالا. فاصله‌ها متناسب با سال میلادی‌اند. روی هر نقطه بزنید.</p>
           <div class="timeline-chart" dir="ltr">
             <div class="tl-legend">
               <span class="tl-leg voc">سنت ارزش فرزند</span>
@@ -225,7 +292,7 @@
               <img class="mono-port"  src="assets/nauck.jpg">
               <figcaption>
                 <b>Bernhard Nauck</b>
-                <span>جامعه‌شناس خانواده · کمنیتس</span>
+                <span>جامعه‌شناس خانواده</span>
                 <span>بازبینی VOC در چارچوب نظریه تولید اجتماعی رفاه</span>
               </figcaption>
             </figure>
@@ -233,12 +300,11 @@
               <p>ناوک (۲۰۰۵، ۲۰۱۴) VOC هافمن را به نظریه کارکرد تولید اجتماعی وصل کرد. کنشگر دو هدف غایی دارد: اعتبار اجتماعی و رفاه فیزیکی. فرزند میانجی رسیدن به این دو هدف است، نه خودِ غایت.</p>
               <p>ساختار فرصت‌ها و منابع مشخص می‌کند کدام ارزش فرزند در دسترس است. پژوهش حاضر همین حلقه را نگه می‌دارد، اما دوگانه‌ی ناوک را با چهار مبنای وبری عوض می‌کند.</p>
               <div class="chip">ناوک ۲۰۱۴ · VOC بازبینی‌شده</div>
-              <div class="chip">اسمیت / لیندنبرگ · تولید رفاه</div>
+              <div class="chip">اسمیت · تولید رفاه</div>
             </div>
           </div>
           <article class="card" style="margin-top:18px">
             <h3>شکل ۱ · مدل بازبینی‌شده VOC</h3>
-            <p class="note">بازتولید برداری از مدل ناوک ۲۰۱۴ در متن پایان‌نامه.</p>
             <div class="model-wrap">
               <svg class="model-svg" viewBox="0 0 720 310" role="img">
                 <defs>
@@ -276,7 +342,6 @@
         <article class="block" id="weber-model-block">
           <p class="kicker">ورود وبر</p>
           <h2>از میانجی رفاه به مبنای کنش</h2>
-          <p>شکل ۲ مسیر را این‌گونه می‌گذارد: بافت اجتماعی‌ـ‌اقتصادی و ساختار فرصت‌ها به چهار مبنای ارزشی می‌رسند. ارزش‌های جایگزین در همان‌جا رقابت می‌کنند. سپس ارزش و مطلوبیت فرزند به قصد و رفتار باروری می‌رسد. میزان‌های باروری سطح کلان است و در این پایان‌نامه سنجیده نشده.</p>
           <article class="card">
             <h3>شکل ۲ · مدل مفهومی پژوهش</h3>
             <p class="note">بازتولید برداری از آخرین مدل فصل مبانی نظری. خط‌چین بیرون از دامنه سنجش است. روی هر مبنای ارزشی بزنید تا فرضیه دیده شود.</p>
@@ -343,12 +408,12 @@
 
         <article class="block" id="weight-block">
           <p class="kicker">روش وزن‌دهی</p>
-          <h2>نمونه باید شبیه جمعیت شود</h2>
-          <p class="lead">سهم استانی پیمایش با سهم جمعیتی یکی نیست. برآورد کشوری بدون وزن اریب می‌شود. وزن در دو مرحله ساخته شد.</p>
+          <h2>وزندهی داده‌ها</h2>
+          <p class="lead">سهم استانی پیمایش با سهم جمعیتی یکی نیست. وزن در دو مرحله ساخته شد.</p>
           <div class="grid-2">
             <article class="card">
               <h3>مرحله ۱ · پساطبقه‌بندی</h3>
-              <p>وزن اولیه از توزیع توأم سن، جنس و وضعیت تأهل. مرجع: برآورد مرکز آمار برای ۱۴۰۵.</p>
+              <p>وزن اولیه از توزیع توأم سن، جنس و وضعیت تأهل. مرجع: برآورد مرکز آمار ایران.</p>
             </article>
             <article class="card">
               <h3>مرحله ۲ · IPF / ریکینگ</h3>
@@ -357,7 +422,6 @@
           </div>
           <article class="card" style="margin-top:16px">
             <h3>تصویر دو مرحله</h3>
-            <p class="note">میله تیره سهم نمونه است؛ خط طلا سهم جمعیت. ریکینگ هر حاشیه را جدا میزان می‌کند و آن‌قدر می‌چرخد تا هر سه با جمعیت یکی شوند.</p>
             <div class="model-wrap">
               <svg class="model-svg" viewBox="0 0 940 360" role="img">
                 <defs>
@@ -383,9 +447,6 @@
                 <rect x="56" y="196" width="212" height="72" rx="10" fill="#f3ebe0" stroke="#8a6230"/>
                 <text x="162" y="226" text-anchor="middle" font-size="13" fill="#1c1915">وزن اولیه w₀</text>
                 <text x="162" y="248" text-anchor="middle" font-size="11" fill="#5c564c">N جمعیت سلول ÷ n نمونه سلول</text>
-
-                <text x="162" y="300" text-anchor="middle" font-size="11" fill="#5c564c">مرجع: برآورد مرکز آمار ۱۴۰۵</text>
-                <text x="162" y="320" text-anchor="middle" font-size="11" fill="#8a6230">اریب استانی هنوز می‌ماند</text>
 
                 <path d="M308 180 H336" stroke="#8a6230" stroke-width="1.6" marker-end="url(#ipfArr)"/>
 
@@ -555,7 +616,6 @@
         <p class="kicker">پیوست شماره ۱</p>
         <h2>گویه‌های واردشده به تحلیل عامل</h2>
         <p class="lead">جدول ۱۵ پایان‌نامه. ۲۷ نشانگر نگرشی پس از گزینش نظری.</p>
-        <p><button class="enter" data-go="method" type="button">بازگشت به روش</button></p>
         <div class="table-wrap">
           <table class="data">
             <thead>
@@ -600,7 +660,6 @@
         <p class="kicker">نتایج تحلیل عامل</p>
         <h2>مقادیر ویژه و بارهای چرخش‌یافته</h2>
         <p class="lead">۱۴۹۵۸ مشاهده. استخراج مؤلفه‌های اصلی. چهار عامل نگاه داشته شد. بارهای مطلق کوچک‌تر از ۰٫۴ پنهان شده‌اند.</p>
-        <p><button class="enter" data-go="method" type="button">بازگشت به روش</button></p>
         <article class="card" style="margin-bottom:22px">
           <h3>جدول ۳ · مقادیر ویژه و نسبت واریانس تبیین‌شده</h3>
           <div class="table-wrap">
@@ -620,7 +679,6 @@
         </article>
         <article class="card" style="margin-bottom:22px">
           <h3>تحلیل موازی</h3>
-          <p class="note">خط پیوسته مقادیر ویژه واقعی است؛ خط‌چین مرجع تحلیل موازی است.</p>
           <div class="chart-box tall"><canvas id="parallel"></canvas></div>
         </article>
         <article class="card">
@@ -657,7 +715,7 @@
               </tbody>
             </table>
           </div>
-          <p class="note">عامل ۱ عقلانیت مادی · عامل ۲ هنجارگرایی دینی · عامل ۳ سنت خانوادگی · عامل ۴ گرایش عاطفی. حذف‌شده به‌خاطر یکتایی بالا: مشکلات اقتصادی، ازدواج موقت، ازدواج سفید، گزاره سخت‌گیرانه درباره طلاق.</p>
+          <p class="note">عامل ۱ عقلانیت مادی · عامل ۲ هنجارگرایی دینی · عامل ۳ سنت خانوادگی · عامل ۴ گرایش عاطفی.</p>
         </article>
       </div>
     </section>
@@ -665,18 +723,17 @@
     <section class="view" id="story">
       <div class="shell">
         <p class="kicker">یافته‌ها</p>
-        <h2>ابعاد پیدا شد؛ تیپ خالص پیدا نشد</h2>
-        <p class="lead">تحلیل موازی و کایزر چهار عامل را نگه می‌دارند. خوشه‌ها ترکیب شدت‌اند، نه چهار انسان وبری.</p>
+        <h2>نتایج خوشه‌بندی</h2>
+        <p class="lead">با استفاده از آزمون کالینسکی-هاراباس تنها چهار خوشه استخراج شد</p>
 
         <article class="card" style="margin-bottom:22px">
           <h3>سهم خوشه‌ها</h3>
           <div class="chart-box"><canvas id="clusters"></canvas></div>
-          <p class="note">کالینسکی‌ـ‌هاراباس در چهار خوشه به ۳۶۸۴ می‌رسد و بعد افت می‌کند.</p>
         </article>
 
         <article class="card" style="margin-bottom:22px">
           <h3>نیمرخ عاملی خوشه‌ها</h3>
-          <p>تمایز اغلب در کم‌رنگ بودن یک بُعد است، نه در تسلط کامل یک صورت ایدئال. خوشه دوم زنانه و جوان‌تر است؛ خوشه سوم مسن‌تر و کم‌تحصیل‌تر.</p>
+          <p>تمایز اغلب در کم‌رنگ بودن یک بُعد است، نه در تسلط کامل یک صورت ایدئال.</p>
           <div class="heatplot-wrap">
             <img class="heatplot" src="assets/heatplot-cluster-factors.svg" alt="نیمرخ عاملی خوشه‌ها به تفکیک چهار بُعد">
           </div>
@@ -698,7 +755,7 @@
 
         <article class="card">
           <h3>اثر ابعاد بر مطلوبیت و زمان‌بندی</h3>
-          <p>هر جعبه یک عامل است و میله‌ها اثر همان عامل را روی شش متغیر وابسته نشان می‌دهند. ضریب‌ها پس از کنترل جنس، سن، تأهل، سکونت، تحصیلات و استان‌اند. مقیاس هر جعبه جدا است.</p>
+          <p>ضریب‌ها پس از کنترل جنس، سن، تأهل، سکونت، تحصیلات و استان‌اند.</p>
           <div id="regViz"></div>
           <p class="note">* ۰٫۰۵ &nbsp; ** ۰٫۰۱ &nbsp; *** ۰٫۰۰۱</p>
           <h3 style="margin-top:28px">جدول رگرسیون</h3>
