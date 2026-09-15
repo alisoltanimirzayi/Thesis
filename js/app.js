@@ -254,6 +254,9 @@ drawNauck();
 
 /* Charts */
 let drawn = false;
+function isNarrow() {
+  return window.matchMedia("(max-width: 640px)").matches;
+}
 function chartDefaults() {
   Chart.defaults.color = "#5c564c";
   Chart.defaults.borderColor = "rgba(28,25,21,.12)";
@@ -289,6 +292,7 @@ function drawTfr() {
     { x: 1403, y: 1.48 }
   ];
   const yearTicks = [1365, 1370, 1375, 1380, 1385, 1390, 1395, 1400, 1403];
+  const yearTicksNarrow = [1365, 1375, 1385, 1395, 1403];
   new Chart(canvas, {
     type: "line",
     data: {
@@ -316,15 +320,16 @@ function drawTfr() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { labels: { boxWidth: 10 } } },
+      plugins: { legend: { labels: { boxWidth: 10, font: { size: 11 } } } },
       scales: {
         x: {
           type: "linear",
           min: 1365,
           max: 1403,
-          title: { display: true, text: "سال شمسی" },
+          title: { display: !isNarrow(), text: "سال شمسی" },
           afterBuildTicks(axis) {
-            axis.ticks = yearTicks.map((value) => ({ value }));
+            const src = isNarrow() ? yearTicksNarrow : yearTicks;
+            axis.ticks = src.map((value) => ({ value }));
           },
           ticks: {
             autoSkip: false,
@@ -332,7 +337,11 @@ function drawTfr() {
             callback(value) { return toFa(value); }
           }
         },
-        y: { title: { display: true, text: "فرزند به ازای هر زن" }, suggestedMin: 1, suggestedMax: 7.5 }
+        y: {
+          title: { display: !isNarrow(), text: "فرزند به ازای هر زن" },
+          suggestedMin: 1,
+          suggestedMax: 7.5
+        }
       }
     }
   });
@@ -381,9 +390,9 @@ function drawParallel() {
       maintainAspectRatio: false,
       plugins: { legend: { labels: { boxWidth: 10 } } },
       scales: {
-        x: { title: { display: true, text: "عامل" } },
+        x: { title: { display: !isNarrow(), text: "عامل" } },
         y: {
-          title: { display: true, text: "مقدار ویژه" },
+          title: { display: !isNarrow(), text: "مقدار ویژه" },
           min: -0.1,
           suggestedMax: 5,
           ticks: {
@@ -415,7 +424,7 @@ function drawCharts() {
         const values = chart.data.datasets[0].data;
         const total = values.reduce((a, b) => a + b, 0);
         ctx.save();
-        ctx.font = "600 12px Vazirmatn, Tahoma, sans-serif";
+        ctx.font = isNarrow() ? "600 11px Vazirmatn, Tahoma, sans-serif" : "600 12px Vazirmatn, Tahoma, sans-serif";
         ctx.fillStyle = "#1c1915";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -426,7 +435,7 @@ function drawCharts() {
             true
           );
           const angle = (startAngle + endAngle) / 2;
-          const r = outerRadius + 20;
+          const r = isNarrow() ? outerRadius * 0.62 : outerRadius + 20;
           ctx.fillText(toFa(pct) + "٪", x + Math.cos(angle) * r, y + Math.sin(angle) * r);
         });
         ctx.restore();
@@ -439,8 +448,18 @@ function drawCharts() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      layout: { padding: 28 },
-      plugins: { legend: { position: "left", labels: { boxWidth: 10 } } }
+      layout: { padding: isNarrow() ? 8 : 28 },
+      plugins: {
+        legend: {
+          position: isNarrow() ? "bottom" : "left",
+          labels: { boxWidth: 10, font: { size: 11 } }
+        }
+      },
+      onResize(chart) {
+        const narrow = isNarrow();
+        chart.options.plugins.legend.position = narrow ? "bottom" : "left";
+        chart.options.layout.padding = narrow ? 8 : 28;
+      }
     }
   });
 
@@ -450,7 +469,15 @@ function drawCharts() {
       labels: ["۱۰–۱۴", "۱۵–۱۹", "۲۰–۲۴", "۲۵–۲۹", "۳۰–۳۴", "۳۵–۳۹", "۴۰–۴۴", "+۴۵"],
       datasets: [{ data: [0.1, 3.7, 23.0, 41.0, 24.0, 7.0, 1.0, 0.2], backgroundColor: "#7a7a74", borderRadius: 4 }]
     },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { title: { display: true, text: "درصد" } } } }
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { maxRotation: isNarrow() ? 40 : 0, autoSkip: true, font: { size: 11 } } },
+        y: { title: { display: !isNarrow(), text: "درصد" } }
+      }
+    }
   });
 
   drawPyramid();

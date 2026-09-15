@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>مبانی ارزشی و تصمیم‌گیری به فرزندآوری</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -24,21 +24,26 @@
         <div class="spot"></div>
         <div class="ambi"></div>
         <ul>
-          <li><a href="#problem" data-index="0" class="active">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
-            <span>مسئله چیست</span></a></li>
-          <li><a href="#others" data-index="1">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19a2 2 0 0 1 2-2h12M6 17V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12"/></svg>
-            <span>دیگران چه کار کرده‌اند؟</span></a></li>
-          <li><a href="#method" data-index="2">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20h16M7 16l3-8 3 5 2-3 4 6"/></svg>
-            <span>چگونه سنجیدیم؟</span></a></li>
-          <li><a href="#story" data-index="3">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 14l3-3 2 2 4-5"/></svg>
-            <span>روایت داده‌ها چه بود؟</span></a></li>
-          <li><a href="#picture" data-index="4">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
-            <span>چه تصویری به دست آمد؟</span></a></li>
+          <li><a href="#problem" data-index="0" class="active" aria-label="مسئله چیست">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v4h1"/></svg>
+            <span class="nav-full" aria-hidden="true">مسئله چیست</span>
+            <span class="nav-short" aria-hidden="true">مسئله</span></a></li>
+          <li><a href="#others" data-index="1" aria-label="دیگران چه کار کرده‌اند؟">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 19a2 2 0 0 1 2-2h12M6 17V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12"/></svg>
+            <span class="nav-full" aria-hidden="true">دیگران چه کار کرده‌اند؟</span>
+            <span class="nav-short" aria-hidden="true">پیشینه</span></a></li>
+          <li><a href="#method" data-index="2" aria-label="چگونه سنجیدیم؟">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 20h16M7 16l3-8 3 5 2-3 4 6"/></svg>
+            <span class="nav-full" aria-hidden="true">چگونه سنجیدیم؟</span>
+            <span class="nav-short" aria-hidden="true">روش</span></a></li>
+          <li><a href="#story" data-index="3" aria-label="روایت داده‌ها چه بود؟">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 14l3-3 2 2 4-5"/></svg>
+            <span class="nav-full" aria-hidden="true">روایت داده‌ها چه بود؟</span>
+            <span class="nav-short" aria-hidden="true">یافته‌ها</span></a></li>
+          <li><a href="#picture" data-index="4" aria-label="چه تصویری به دست آمد؟">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+            <span class="nav-full" aria-hidden="true">چه تصویری به دست آمد؟</span>
+            <span class="nav-short" aria-hidden="true">تصویر</span></a></li>
         </ul>
       </nav>
     </div>
@@ -219,6 +224,38 @@
               <span class="tl-leg voc">سنت ارزش فرزند</span>
               <span class="tl-leg demo">سنت جمعیت و اقتصاد</span>
             </div>
+            <ol class="tl-stack">
+              <li>
+                <button class="tl-card demo" data-modal="era1" type="button">
+                  <b>۱۹۲۹–۴۵</b><span>گذار اول</span>
+                </button>
+              </li>
+              <li>
+                <button class="tl-card demo" data-modal="era2" type="button">
+                  <b>۱۹۵۷–۶۰</b><span>اقتصاد خانواده</span>
+                </button>
+              </li>
+              <li>
+                <button class="tl-card demo" data-modal="era3" type="button">
+                  <b>۱۹۶۳–۸۲</b><span>جریان ثروت</span>
+                </button>
+              </li>
+              <li class="voc">
+                <button class="tl-card voc" data-modal="era5" type="button">
+                  <b>۱۹۷۳</b><span>VOC هافمن</span>
+                </button>
+              </li>
+              <li>
+                <button class="tl-card demo" data-modal="era4" type="button">
+                  <b>۱۹۸۷</b><span>گذار دوم</span>
+                </button>
+              </li>
+              <li class="voc">
+                <button class="tl-card voc end" data-modal="era6" type="button">
+                  <b>۲۰۰۵–۱۴</b><span>VOC ناوک</span>
+                </button>
+              </li>
+            </ol>
             <div class="tl-body">
               <div class="tl-gutter">
                 <span class="tl-gutter-voc">ارزش فرزند</span>
@@ -305,7 +342,7 @@
           </div>
           <article class="card" style="margin-top:18px">
             <h3>شکل ۱ · مدل بازبینی‌شده VOC</h3>
-            <div class="model-wrap">
+            <div class="model-wrap is-wide">
               <svg class="model-svg" viewBox="0 0 720 310" role="img">
                 <defs>
                   <marker id="nArr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8a6230"/></marker>
@@ -344,7 +381,7 @@
           <h2>از میانجی رفاه به مبنای کنش</h2>
           <article class="card">
             <h3>شکل ۲ · مدل مفهومی پژوهش</h3>
-            <div class="model-wrap">
+            <div class="model-wrap is-wide is-xl">
               <svg class="model-svg" viewBox="0 0 980 250" role="img">
                 <defs>
                   <marker id="wArr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8a6230"/></marker>
@@ -421,7 +458,7 @@
           </div>
           <article class="card" style="margin-top:16px">
             <h3>تصویر دو مرحله</h3>
-            <div class="model-wrap">
+            <div class="model-wrap is-wide is-xl">
               <svg class="model-svg" viewBox="0 0 940 360" role="img">
                 <defs>
                   <marker id="ipfArr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#8a6230"/></marker>
@@ -616,7 +653,7 @@
         <h2>گویه‌های واردشده به تحلیل عامل</h2>
         <p class="lead">جدول ۱۵ پایان‌نامه. ۲۷ نشانگر نگرشی پس از گزینش نظری.</p>
         <div class="table-wrap">
-          <table class="data">
+          <table class="data stack-cards">
             <thead>
               <tr><th>ردیف</th><th>پرسش</th><th>گزینه / گویه</th></tr>
             </thead>
@@ -662,7 +699,7 @@
         <article class="card" style="margin-bottom:22px">
           <h3>جدول ۳ · مقادیر ویژه و نسبت واریانس تبیین‌شده</h3>
           <div class="table-wrap">
-            <table class="data">
+            <table class="data freeze-col">
               <thead>
                 <tr><th>عامل</th><th>مقدار ویژه</th><th>تفاوت</th><th>نسبت</th><th>نسبت تراکمی</th></tr>
               </thead>
@@ -684,7 +721,7 @@
           <h3>جدول ۴ · ماتریس بارهای عاملی چرخش‌یافته و یکتایی</h3>
           <p class="note">چرخش مایل. خانه خالی یعنی |بار| < ۰٫۴.</p>
           <div class="table-wrap">
-            <table class="data">
+            <table class="data freeze-col">
               <thead>
                 <tr><th>گویه</th><th>عامل ۱</th><th>عامل ۲</th><th>عامل ۳</th><th>عامل ۴</th><th>یکتایی</th></tr>
               </thead>
@@ -760,7 +797,7 @@
           <h3 style="margin-top:28px">جدول رگرسیون</h3>
           <p class="note">مدل‌های OLS · متغیرهای وابسته</p>
           <div class="table-wrap">
-            <table class="data">
+            <table class="data freeze-col">
               <thead>
                 <tr>
                   <th>عامل</th>
