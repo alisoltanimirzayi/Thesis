@@ -431,6 +431,7 @@ body.pic-overlay-on .nav-wrap {
   transform-origin: center;
   animation: pic-gear-spin var(--dur, 28s) linear infinite;
   animation-direction: var(--dir, normal);
+  filter: drop-shadow(0 8px 8px rgba(40, 30, 16, 0.10));
 }
 #picture .gear-rot.paused { animation-play-state: paused; }
 
