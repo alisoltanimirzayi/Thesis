@@ -102,6 +102,7 @@ function go(id, opts = {}) {
   el.classList.add("on");
   document.body.classList.toggle("on-cover", el.id === "cover");
   document.body.classList.toggle("on-contents", el.id === "contents");
+  document.body.classList.toggle("on-picture", el.id === "picture");
   currentView = el.id;
 
   const restore = opts.section && el.contains(document.getElementById(opts.section));
@@ -119,6 +120,8 @@ function go(id, opts = {}) {
   if (id === "story") requestAnimationFrame(drawCharts);
   if (id === "factors") requestAnimationFrame(drawParallel);
   if (id === "problem") requestAnimationFrame(drawTfr);
+  if (id === "picture") requestAnimationFrame(() => window.PicturePage?.show());
+  else window.PicturePage?.hide();
   history.replaceState(null, "", "#" + id);
 }
 
@@ -442,7 +445,7 @@ function drawCharts() {
       }
     }],
     data: {
-      labels: ["عقلانیت مادی", "هنجارگرایی دینی", "سنت خانوادگی", "گرایش عاطفی"],
+      labels: ["خوشه اول", "خوشه دوم", "خوشه سوم", "خوشه چهارم"],
       datasets: [{ data: [17.95, 23, 28.91, 30.14], backgroundColor: COLORS, borderWidth: 0 }]
     },
     options: {
@@ -507,6 +510,14 @@ const REG_OUTCOMES = [
   { key: "mgirl", label: "سن ایدئال ازدواج دختر" }
 ];
 
+const REG_HYP = {
+  "عقلانیت مادی": "hyp-zweck",
+  "هنجارگرایی دینی": "hyp-wert",
+  "هنجارگرایی خانوادگی": "hyp-wert",
+  "سنت خانوادگی": "hyp-trad",
+  "گرایش عاطفی": "hyp-affekt"
+};
+
 function drawReg() {
   const host = document.getElementById("regViz");
   if (!host) return;
@@ -515,6 +526,15 @@ function drawReg() {
     <div class="grid-2">${factors.map((name, i) => regFactorPanel(name, i)).join("")}</div>
     <p class="legend"><span style="color:var(--sage)">میله سبز: اثر مثبت</span><span style="color:var(--rose)">میله قرمز: اثر منفی</span><span>کم‌رنگ: غیرمعنادار</span></p>
   `;
+  host.querySelectorAll("[data-modal]").forEach((n) => {
+    n.addEventListener("click", () => openModal(n.dataset.modal));
+    n.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openModal(n.dataset.modal);
+      }
+    });
+  });
 }
 
 function regFactorPanel(name, index) {
@@ -535,8 +555,12 @@ function regFactorPanel(name, index) {
       <div class="coef-val">${s.v.toFixed(3).replace("-", "−")}${s.star}</div>
     </div>`;
   }).join("");
+  const hyp = REG_HYP[name];
+  const title = hyp
+    ? `<h4 data-modal="${hyp}" role="button" tabindex="0">${name}</h4>`
+    : `<h4>${name}</h4>`;
   return `<article class="reg-panel">
-    <h4>${name}</h4>
+    ${title}
     ${rows}
   </article>`;
 }

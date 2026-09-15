@@ -565,6 +565,9 @@ table.data.freeze-col tbody tr:hover td:first-child { background: #fffaf2; }
   color: var(--gold-2);
   line-height: 1.6;
 }
+.reg-panel h4[data-modal] {
+  cursor: pointer;
+}
 .coef {
   display: grid;
   grid-template-columns: minmax(0, 9.2rem) minmax(3.5rem, 1fr) auto;
